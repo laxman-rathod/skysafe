@@ -6,6 +6,7 @@ import { appwriteConfig } from "../appwrite/config";
 import { parseStringify } from "../utils";
 import { cookies } from "next/headers";
 import { avatarPlaceholderUrl } from "@/constants";
+import { redirect } from "next/navigation";
 
 type verifySecretProps = {
   accountId: string;
@@ -97,4 +98,30 @@ export const getCurrentUser = async () => {
     return null;
   }
   return parseStringify(user.documents[0]);
+};
+
+export const signOutUser = async () => {
+  const { account } = await createSessionClient();
+  try {
+    // Delete the current session
+    await account.deleteSession("current");
+    (await cookies()).delete("appwrite-session");
+  } catch (error) {
+    handleError(error, "Failed to sign out user");
+  } finally {
+    redirect("/sign-in");
+  }
+};
+
+export const signInUser = async ({ email }: { email: string }) => {
+  try {
+    const existingUser = await getUserByEmail(email);
+    if (!existingUser) {
+      return parseStringify({ accountId: null, error: "User not found" });
+    }
+    await sendEmailOTP({ email });
+    return parseStringify({ accountId: existingUser.accountId });
+  } catch (error) {
+    handleError(error, "Failed to sign in user");
+  }
 };
