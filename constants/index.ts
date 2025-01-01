@@ -82,5 +82,5 @@ export const sortTypes = [
 ];
 
 export const avatarPlaceholderUrl =
-  "https://img.freepik.com/premium-vector/boy-icon-design-template-vector_67715-454.jpg?w=740";
+  "https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100207.jpg?t=st=1735755737~exp=1735759337~hmac=af585469bb3ea8c5a45bd7a8ce88f2b7393627667ac2934673315b772490f58c&w=740";
 export const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB

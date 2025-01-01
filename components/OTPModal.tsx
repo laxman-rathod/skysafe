@@ -86,6 +86,7 @@ const OTPModal = ({ email, accountId }: OTPModalProps) => {
             <AlertDialogAction
               type="button"
               onClick={handleSubmit}
+              disabled={isLoading}
               className="shad-submit-btn h-12"
             >
               Submit
