@@ -18,7 +18,7 @@ const Search = () => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const path = usePathname();
-  const [debouncedQuery] = useDebounce(query, 300);
+  const [debouncedQuery] = useDebounce(query, 100);
 
   useEffect(() => {
     const fetchFiles = async () => {
@@ -55,6 +55,21 @@ const Search = () => {
     );
   };
 
+  const handleClickOutside = (e: MouseEvent) => {
+    if (e.target instanceof HTMLElement && !e.target.closest(".search")) {
+      setOpen(false);
+      setResults([]);
+      setQuery("");
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="search">
       <div className="search-input-wrapper">
@@ -71,7 +86,7 @@ const Search = () => {
           onChange={(e) => setQuery(e.target.value)}
         />
 
-        {open && (
+        {open && query.length > 0 && (
           <ul className="search-result">
             {results.length > 0 ? (
               results.map((file) => (
@@ -94,7 +109,7 @@ const Search = () => {
 
                   <FormattedDateTime
                     date={file.$createdAt}
-                    className="caption line-clamp-1 text-light-200"
+                    className="caption text-light-200"
                   />
                 </li>
               ))
