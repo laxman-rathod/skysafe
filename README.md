@@ -97,4 +97,4 @@ For any inquiries, please reach out to [laxmanrathod2096@gmail.com](mailto:laxma
 
 ## 📜 License </br>
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details. 
