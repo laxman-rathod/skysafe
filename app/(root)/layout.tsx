@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import Header from "@/components/Header";
 import MobileNavbar from "@/components/MobileNavbar";
 import Sidebar from "@/components/Sidebar";
